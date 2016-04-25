@@ -62,7 +62,7 @@ else
 	# Install Motion which is the piece of software that will read video from the device file and
 	# stream images across a network. The software is stored in the standard repositories where
 	# it can be accessed easily.
-	sudo --assume-yes apt-get install motion
+	apt-get --assume-yes install motion
 	
 	# Get the script used to execute all programs from GitHub.
 	git clone https://github.com/siuthunderdawgs/rpi-motion-script.git
