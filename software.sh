@@ -13,7 +13,6 @@ if [ "$EUID" -ne 0 ]; then
 	exit
 	
 else
-
 	# Make directory to store git files
 	if [ ! -d $GIT_DIR ]; then
 		mkdir $GIT_DIR
@@ -35,6 +34,16 @@ else
 	fi
 
 	cd $GIT_DIR
+
+	# In order to install a kernel module, a copy of the kernel headers must be available
+	# on the operating system. There is a script available that will download, compile, and
+	# install the kernel modules for you. It requires a single dependency (libncurses5-dev),
+	# but it can otherwise be downloaded and executed very easily.
+	apt-get --assume-yes install libncurses5-dev
+	wget https://raw.githubusercontent.com/notro/rpi-source/master/rpi-source -O /usr/bin/rpi-source
+	chmod +x /usr/bin/rpi-source
+	/usr/bin/rpi-source -q --tag-update
+	rpi-source
 
 	# Install the software that serves the video from the FLIR Lepton Module to a device 
 	# file. The software is stored on GitHub and can be compiled using a simple makescript. 
